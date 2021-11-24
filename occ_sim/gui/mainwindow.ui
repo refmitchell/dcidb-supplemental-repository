@@ -1,0 +1,632 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1163</width>
+    <height>656</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="1" rowspan="2">
+     <layout class="QGridLayout" name="mpl_layout_space"/>
+    </item>
+    <item row="1" column="0">
+     <widget class="QPushButton" name="refresh_button">
+      <property name="text">
+       <string>Refresh</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QGroupBox" name="groupBox">
+      <property name="minimumSize">
+       <size>
+        <width>260</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>260</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="title">
+       <string>Settings</string>
+      </property>
+      <widget class="QGroupBox" name="groupBox_2">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>240</y>
+         <width>241</width>
+         <height>150</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Initial</string>
+       </property>
+       <widget class="QSpinBox" name="init_light_azimuth_spinbox">
+        <property name="geometry">
+         <rect>
+          <x>160</x>
+          <y>30</y>
+          <width>71</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="maximum">
+         <number>359</number>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="init_light_elevation_spinbox">
+        <property name="geometry">
+         <rect>
+          <x>160</x>
+          <y>60</y>
+          <width>71</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="maximum">
+         <number>359</number>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="init_wind_azimuth_spinbox">
+        <property name="geometry">
+         <rect>
+          <x>160</x>
+          <y>90</y>
+          <width>70</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="maximum">
+         <number>359</number>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_3">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>30</y>
+          <width>140</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Light Azimuth (deg)</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_4">
+        <property name="geometry">
+         <rect>
+          <x>13</x>
+          <y>60</y>
+          <width>140</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Light Elevation (deg)</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_5">
+        <property name="geometry">
+         <rect>
+          <x>19</x>
+          <y>90</y>
+          <width>141</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Wind Azimuth (deg)</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_6">
+        <property name="geometry">
+         <rect>
+          <x>34</x>
+          <y>120</y>
+          <width>120</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Wind Speed (m/s)</string>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="init_wind_speed_spinbox">
+        <property name="geometry">
+         <rect>
+          <x>160</x>
+          <y>120</y>
+          <width>69</width>
+          <height>26</height>
+         </rect>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QComboBox" name="sim_combobox">
+       <property name="geometry">
+        <rect>
+         <x>70</x>
+         <y>30</y>
+         <width>171</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string/>
+       </property>
+       <item>
+        <property name="text">
+         <string>Weighted Vector Sum</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Non-optimal Weighted Sum</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Biased non-optimal Weighted Sum</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Weighted Arithmetic Mean</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Winner Take All</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Single Cue</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QLabel" name="label">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>67</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Method</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_2">
+       <property name="geometry">
+        <rect>
+         <x>42</x>
+         <y>60</y>
+         <width>21</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>n = </string>
+       </property>
+      </widget>
+      <widget class="QGroupBox" name="groupBox_3">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>390</y>
+         <width>241</width>
+         <height>150</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Conflict</string>
+       </property>
+       <widget class="QSpinBox" name="conf_light_azimuth_spinbox">
+        <property name="geometry">
+         <rect>
+          <x>160</x>
+          <y>30</y>
+          <width>71</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="maximum">
+         <number>359</number>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="conf_light_elevation_spinbox">
+        <property name="geometry">
+         <rect>
+          <x>160</x>
+          <y>60</y>
+          <width>71</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="maximum">
+         <number>359</number>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="conf_wind_azimuth_spinbox">
+        <property name="geometry">
+         <rect>
+          <x>160</x>
+          <y>90</y>
+          <width>70</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="maximum">
+         <number>359</number>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_7">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>30</y>
+          <width>140</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Light Azimuth (deg)</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_8">
+        <property name="geometry">
+         <rect>
+          <x>13</x>
+          <y>60</y>
+          <width>140</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Light Elevation (deg)</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_9">
+        <property name="geometry">
+         <rect>
+          <x>19</x>
+          <y>90</y>
+          <width>141</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Wind Azimuth (deg)</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_10">
+        <property name="geometry">
+         <rect>
+          <x>34</x>
+          <y>120</y>
+          <width>120</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Wind Speed (m/s)</string>
+        </property>
+       </widget>
+       <widget class="QDoubleSpinBox" name="conf_wind_speed_spinbox">
+        <property name="geometry">
+         <rect>
+          <x>160</x>
+          <y>120</y>
+          <width>69</width>
+          <height>26</height>
+         </rect>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QLineEdit" name="title_lineedit">
+       <property name="geometry">
+        <rect>
+         <x>70</x>
+         <y>90</y>
+         <width>113</width>
+         <height>25</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_11">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>90</y>
+         <width>30</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Title</string>
+       </property>
+      </widget>
+      <widget class="Line" name="line">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>220</y>
+         <width>240</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+      <widget class="QStackedWidget" name="options_stack">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>120</y>
+         <width>241</width>
+         <height>101</height>
+        </rect>
+       </property>
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <widget class="QWidget" name="page_3">
+        <widget class="QGroupBox" name="groupBox_6">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>240</width>
+           <height>100</height>
+          </rect>
+         </property>
+         <property name="title">
+          <string>Options</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="bws_page">
+        <widget class="QGroupBox" name="bws_groupBox">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>240</width>
+           <height>100</height>
+          </rect>
+         </property>
+         <property name="title">
+          <string>Options</string>
+         </property>
+         <widget class="QDoubleSpinBox" name="bws_slope_spinbox">
+          <property name="geometry">
+           <rect>
+            <x>120</x>
+            <y>30</y>
+            <width>91</width>
+            <height>26</height>
+           </rect>
+          </property>
+          <property name="decimals">
+           <number>3</number>
+          </property>
+          <property name="minimum">
+           <double>-1.000000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>1000.000000000000000</double>
+          </property>
+          <property name="singleStep">
+           <double>1.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>53.000000000000000</double>
+          </property>
+         </widget>
+         <widget class="QDoubleSpinBox" name="bws_variance_spinbox">
+          <property name="geometry">
+           <rect>
+            <x>120</x>
+            <y>60</y>
+            <width>91</width>
+            <height>26</height>
+           </rect>
+          </property>
+          <property name="decimals">
+           <number>6</number>
+          </property>
+          <property name="singleStep">
+           <double>0.000100000000000</double>
+          </property>
+          <property name="value">
+           <double>0.000303000000000</double>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_13">
+          <property name="geometry">
+           <rect>
+            <x>39</x>
+            <y>30</y>
+            <width>81</width>
+            <height>26</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Adj. slope</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_14">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>60</y>
+            <width>91</width>
+            <height>26</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Bias variance</string>
+          </property>
+         </widget>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="nws_page">
+        <widget class="QGroupBox" name="nws_groupBox">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>240</width>
+           <height>100</height>
+          </rect>
+         </property>
+         <property name="title">
+          <string>Options</string>
+         </property>
+         <widget class="QDoubleSpinBox" name="nws_slope_spinbox">
+          <property name="geometry">
+           <rect>
+            <x>120</x>
+            <y>30</y>
+            <width>91</width>
+            <height>26</height>
+           </rect>
+          </property>
+          <property name="decimals">
+           <number>3</number>
+          </property>
+          <property name="minimum">
+           <double>-1.000000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>1000.000000000000000</double>
+          </property>
+          <property name="singleStep">
+           <double>1.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>53.000000000000000</double>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_15">
+          <property name="geometry">
+           <rect>
+            <x>39</x>
+            <y>30</y>
+            <width>81</width>
+            <height>26</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Adj. slope</string>
+          </property>
+         </widget>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="sc_page">
+        <widget class="QGroupBox" name="groupBox_4">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>240</width>
+           <height>100</height>
+          </rect>
+         </property>
+         <property name="title">
+          <string>Options</string>
+         </property>
+         <widget class="QLabel" name="label_12">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>30</y>
+            <width>31</width>
+            <height>25</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Cue</string>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="sc_cue_combobox">
+          <property name="geometry">
+           <rect>
+            <x>60</x>
+            <y>30</y>
+            <width>61</width>
+            <height>25</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string/>
+          </property>
+          <item>
+           <property name="text">
+            <string>Light</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Wind</string>
+           </property>
+          </item>
+         </widget>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="QSpinBox" name="n_spinbox">
+       <property name="geometry">
+        <rect>
+         <x>70</x>
+         <y>60</y>
+         <width>48</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="maximum">
+        <number>1000000</number>
+       </property>
+       <property name="value">
+        <number>30</number>
+       </property>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1163</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,166 @@
+\documentclass[10pt, a4paper]{article}
+
+%\usepackage{xurl}
+
+\usepackage{abstract}
+
+\usepackage{cite}
+%\usepackage{url}
+\usepackage[margin=1in]{geometry} \usepackage{multirow}
+\usepackage{graphicx} \usepackage{amsmath} \usepackage{wrapfig}
+
+\usepackage[normalem]{ulem} \useunder{\uline}{\ul}{}
+
+\graphicspath{{img/}}
+
+% Any configuration that should be done before the end of the preamble:
+\usepackage{hyperref} \hypersetup{colorlinks=true, urlcolor=blue,
+  linkcolor=blue, citecolor=blue}
+
+\begin{document}
+\title{Software Reference}
+\author{Robert Mitchell: r.mitchell@ed.ac.uk}
+\maketitle
+\section{Introduction}
+The software should be generally readable but the structure may not be
+intuitive due to the development cycle. As such, we have prepared this
+document to provide a quick reference for readers that want to see the
+code which relates directly to equations and methods from the
+paper.
+
+\section{$\kappa$ approximation}
+The $\kappa$ approximation process is spread across different stages
+in different files.
+
+\subsection{Raw $R$ estimators}
+The raw $R$ estimators are computed in util/models.py. The
+ReliabilityModel class provides utilities for interacting with the
+light and wind reliability models and the basic estimators are fit to
+the data within the constructor. The dataset itself is stored in
+data/elevation\textunderscore rvals.csv and
+data/wind\textunderscore rvals.csv for light elevation and wind speed
+respectively.
+
+These estimators are:
+
+\begin{align}
+  R_{Wind} &= (0.11s + 0.43)\\
+  R_{Light} &=
+  \begin{cases}
+    (-0.07\phi + 0.80), &\text{if } \phi \leq 75^\circ,\\
+    (-1.26\phi + 2.31) &\text{otherwise.}
+  \end{cases}
+\end{align}
+
+Recall, these estimators produce populations with low concentrations;
+to fix this we augment the estimators with small positive content.
+
+\subsection{Constants $c_{Wind}, c_{Light}$}
+These constants are included in world/cue.py; Lines 42-47, under the function
+\textunderscore\textunderscore kappa\textunderscore approximation().
+
+The final estimators are now:
+
+\begin{align}
+  R_{Wind} &= (0.11s + 0.43) + c_{Wind}\\
+  R_{Light} &=
+  \begin{cases}
+    (-0.07\phi + 0.80) + c_{Light}, &\text{if } \phi \leq 75^\circ,\\
+    (-1.26\phi + 2.31) + c_{Light} &\text{otherwise.}
+  \end{cases}
+\end{align}
+
+The constants $c_{Wind}$ and $c_{Light}$ were tuned by hand.
+
+\subsection{$\kappa$ approximation from Mardia and Jupp (2009)}
+As a reminder, the $\kappa$ approximation expression is:
+
+\begin{equation} \label{eq:kappaapprox}
+\hat\kappa \approx
+\begin{cases}
+  2R + R^3 + \frac{5}{6}R^5, &\text{if } R < 0.53\\
+  \frac{1}{2(1 - R) - (1 - R)^2 - (1-R)^3}, &\text{if } R \geq 0.85\\
+  -0.4 + 1.39R + \frac{0.43}{(1-R)}, &\text{otherwise}
+\end{cases}
+\end{equation}
+
+This expression can be found in code in world/cue.py; Lines 54 - 62,
+within the function \textunderscore\textunderscore
+kappa\textunderscore approximation().
+
+\section{Integration models}
+All integration models are available within
+util/integration\textunderscore models.py. The model names have
+changed over development, a lookup is provided in Table \ref{tab:lookup}.
+
+\begin{table}[htp!]
+  \centering
+  \caption{\label{tab:lookup} Lookup table documenting model names which
+    have changed between the paper and the code.}
+  \vspace{5px}
+  \begin{tabular}{|l|l|}
+    \hline
+    \textbf{Paper} & \textbf{Code} \\ \hline
+    WVS            & CMLE          \\ \hline
+    NVS            & NWS           \\ \hline
+    BVS            & BWS           \\ \hline
+  \end{tabular}
+\end{table}
+
+
+Each model is represented by a Simulator class which will have two key
+functions; simulate\textunderscore treatment() and
+compute\textunderscore integration(). Weights are computed (as per
+each model specification) within the simulate\textunderscore
+treatment() function. The final integration is computed by
+compute\textunderscore integration().
+
+\textbf{BVS Note:} As NVS is a subset of BVS (without the biases) we
+used a parameter flag for BVS (bias\textunderscore window = -1) which
+makes the BVS class function as the NVS model. The BVS class also
+contains many references to and much logic concerning \textit{bias
+  windows}; the concept was removed as one of the last stages of active
+development, as such they feature prominently in code. They are not
+used for any of the results presented.
+
+\section{Evaluation process}
+The evaluation process is spread across two files:
+population\textunderscore generation.py and model\textunderscore
+evaluation.py. As the population generation stage takes a long time to
+run (especially instances where we search across two dimensions),
+populations are generated and then stored in csv files for later
+evaluation.
+
+Population generation is reasonably straightforward: a simulator is
+created for each parameterisation and then a Treatment (see
+util/treatment.py) is created for each of the behavioural under which
+the beetles were tested. 1,000,000 simulated beetles are tested on
+each simlator and the results are then collected into $5^\circ$
+bins. This forms the probability mass function which works as the
+basis for the evaluation procedure.
+
+The evaluation procedure reads in both the set of p.m.f.s (each
+simulator will produce its own) and the behavioural data, then
+evaluates the likelihood of the behavioural data against the
+p.m.f. for each simulator. The likelihood results are stored in
+dataframes and saved to csv files; our results are in the
+results\textunderscore dfs directory.
+
+Within model\textunderscore evaluation.py, there are functions for
+evaluating each case we looked at (some of which did not make the
+final paper for various reasons). Each of these follows the same
+structure and each uses the same probability routine (which is
+reasonably well documented); an exmaple can be found on Lines 93-103
+which corresponds to the equations given in the paper.
+
+\section{Mimic-data generation}
+The data generation routines can be found in data\textunderscore
+production.py The mimic-data is curated such that the mean vector of
+the mimic populations is arbitrarily close to the mean vector of the
+behavioural populations. There are two separate routines, one for the
+cue combination data, and another for the three-day experiment. Each
+routine simply reads in the corresponding behavioural data which is
+then used to choose a suitable population size.
+
+\end{document}
+

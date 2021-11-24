@@ -1,0 +1,28 @@
+# Cue combination simulator configuration example;
+
+# Treatment 1: Wind speed 2.5m/s, Light elevation: 45deg, Conflict: 120deg
+treatment-parameters:
+  # String - A unique name for this condition - used to organise output
+  treatment-id: "Balance point trials"
+  # Integer - The number of trials you want the software to simulate
+  number-of-trials: 30
+
+# The initial conditions (cues aligned)
+initial-condition:
+  light:
+    elevation: 45 # Integer - Light elevation (in degrees)
+    azimuth: 0    # Integer - Light azimuthal position (in degrees)
+
+  wind:
+    azimuth: 0  # Integer - The prevailing azimuth of the wind (in degrees)
+    speed: 2.5  # Float - The wind speed expressed in m/s
+
+# The conflict conditions
+conflict-condition:
+  light:
+    elevation: 45
+    azimuth: 0
+
+  wind:
+    azimuth: 120
+    speed: 2.5
