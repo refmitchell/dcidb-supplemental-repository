@@ -1,4 +1,4 @@
-# dcibd-supplemental-repository
+# dcibd-supplemental-repository [![DOI](https://zenodo.org/badge/431483160.svg)](https://zenodo.org/badge/latestdoi/431483160)
 
 This repository contains the cue combination behavioural data and
 simulation software tools which were used to produce the modelling
