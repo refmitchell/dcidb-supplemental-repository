@@ -1,14 +1,17 @@
-# occ-sim
+# dcibd-supplemental-repository
 
-This repository contains the cue combination simulation software tools
-which were used to produce the modelling work for the paper. The name
-occ-sim comes from [O]ptimal [C]ue [C]ombination [Sim]ulator; the
-irony is not lost on us. The repository constitues a bespoke software
-suite which was designed to be easily re-configured or re-written as
-our understanding changed. As such, the structure is somewhat
-haphazard but should be readable. There is an included pdf which
-points to the code for each of the main modelling sections with some
-context or additional information.
+This repository contains the cue combination behavioural data and
+simulation software tools which were used to produce the modelling
+work for the paper "Directional Cue Integration in Dung Beetles"
+(Shaverdian et al., in preparation).
+
+The name occ_sim comes from [O]ptimal [C]ue [C]ombination [Sim]ulator;
+the irony is not lost on us. The repository constitues a bespoke
+software suite which was designed to be easily re-configured or
+re-written as our understanding changed. As such, the structure is
+somewhat haphazard but should be readable. There is an included pdf
+which points to the code for each of the main modelling sections with
+some context or additional information.
 
 At its core the software generates simulated beetle populations under
 different cue-conflict conditions. Specifically we are interested in
