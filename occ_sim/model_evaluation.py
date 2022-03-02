@@ -342,6 +342,7 @@ def cross_model_evaluation():
     binwidth = 360 / nbins
 
     data = pd.read_csv("data/changes_full.csv")
+
     conditions = list(data.columns)
 
     files = [
@@ -366,7 +367,9 @@ def cross_model_evaluation():
     evaluation_df = pd.DataFrame(columns=conditions, index=norm_dist_dict.keys())
 
     # Associate # of parameters for AIC computation to a filename key
+    # AIC paramter counts are reused to compute the BIC
     aic_params = {k:None for k in evaluation_df.index}
+    total_n = 0
     for k in list(aic_params.keys()):
         if "BWS" in k:
             aic_params[k] = 2
@@ -376,6 +379,7 @@ def cross_model_evaluation():
             aic_params[k] = 0
 
     for model in evaluation_df.index:
+        total_n = 0 # All models use same data so we can take the last iteration
         for condition in evaluation_df.columns:
             # Probability using P(M|d) prop_to P(d|M)P(M)
             # Assuming even priors (poor assumption):
@@ -395,22 +399,28 @@ def cross_model_evaluation():
             data_prob = data_probs.sum(axis='index')
 
             evaluation_df[condition][model] = data_prob
+            total_n += len(idxed_data)
 
 
     evaluation_df["sum"] = evaluation_df.sum(axis='columns')
+    print("Total n: {}".format(total_n))
 
     ml = evaluation_df["sum"].max()
     evaluation_df["norm"] = evaluation_df["sum"].subtract(ml)
-    print(evaluation_df[evaluation_df["norm"] == 1])
 
     # Compute AIC and include in the evaluation_df
     # AIC = 2k - 2ln(Likelihood)
-    print(evaluation_df)
+    # BIC = k*ln(total_n) - 2*ln(Likelihood)
     evaluation_df["aic"] = None
+    evaluation_df["bic"] = None
     for m in aic_params.keys():
         p = aic_params[m]
         evaluation_df["aic"][m] = 2*p - 2*evaluation_df["sum"][m]
+        evaluation_df["bic"][m] = p*np.log(total_n) - 2*evaluation_df["sum"][m]
 
+    # Include relative measures in the result df; for aic/bic, lower is better
+    evaluation_df["r_aic"] = evaluation_df["aic"].div(min(evaluation_df["aic"]))
+    evaluation_df["r_bic"] = evaluation_df["bic"].div(min(evaluation_df["bic"]))
     evaluation_df.to_csv("cmedf.csv")
 
     fig = plt.figure(figsize=(12,7))
@@ -429,7 +439,7 @@ def cross_model_evaluation():
     fill_y = np.zeros(len(fill_x))
     plt.fill_between(fill_x, fill_y, color="grey")
     plt.savefig("../latex/img/cme.png", bbox_inches="tight")
-    plt.show()
+    # plt.show()
     return evaluation_df
 
 def bws_param_evaluation():
@@ -547,8 +557,8 @@ if __name__ == "__main__":
     using population_generation.py, then the evaluation results may be slightly
     different. The overall picture however, should remain the same.
     """
-    bws_variance_evaluation()
+#    bws_variance_evaluation()
 #    bws_param_evaluation()
 #    bws_variance_and_slope_evaluation()
-#    cross_model_evaluation()
+    cross_model_evaluation()
 #    print(nws_param_evaluation())
