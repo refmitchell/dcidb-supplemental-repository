@@ -202,17 +202,17 @@ if __name__ == "__main__":
     desired plot.
     """
 
-    """
-    Plotting a circular weighted summation vs an weighted arithmetic mean.
-    """
+    # """
+    # Plotting a circular weighted summation vs an weighted arithmetic mean.
+    # """
     # n = 10000
     # weights = np.arange(0.1,1,0.1)
 
     # cue_one = np.zeros(n)
     # cue_two = np.linspace(0,np.pi,n)
 
-    # fig = plt.figure(figsize=(16,9))
-    # plt.subplot(121)
+    # fig = plt.figure(figsize=(8,4.5))
+    # plt.subplot(122)
 
     # for weight in weights:
     #     w1 = weight
@@ -224,16 +224,24 @@ if __name__ == "__main__":
 
     # plt.vlines([60,120], 0, 180, color='grey', alpha=0.5, linestyles='--')
     # plt.xlim([0,180])
+    # plt.xticks([0,60,120,180], labels=[r"$0^\circ$",
+    #                                    r"$60^\circ$",
+    #                                    r"$120^\circ$",
+    #                                    r"$180^\circ$",
+    # ])
+    # plt.yticks([0,60,120,180], labels=[r"$0^\circ$",
+    #                                    r"$60^\circ$",
+    #                                    r"$120^\circ$",
+    #                                    r"$180^\circ$",
+    # ])
+
     # plt.ylim([0,180])
-    # plt.gca().yaxis.set_major_formatter(StrMethodFormatter(u"{x:.0f}$^\circ$"))
-    # plt.gca().xaxis.set_major_formatter(StrMethodFormatter(u"{x:.0f}$^\circ$"))
     # plt.xlabel("Angular position of C2")
     # plt.ylabel("WVS Decision Variable L")
-    # plt.title("Circular weighted sum output for varying conflict")
+    # plt.title("Weighted Vector Sum (WVS)")
     # plt.gca().set_aspect('equal')
-    # plt.legend()
 
-    # plt.subplot(122)
+    # plt.subplot(121)
 
     # for weight in weights:
     #     w1 = weight
@@ -246,16 +254,24 @@ if __name__ == "__main__":
     # plt.vlines([60,120], 0, 180, color='grey', alpha=0.5, linestyles='--')
     # plt.xlim([0,180])
     # plt.ylim([0,180])
-    # plt.gca().yaxis.set_major_formatter(StrMethodFormatter(u"{x:.0f}$^\circ$"))
-    # plt.gca().xaxis.set_major_formatter(StrMethodFormatter(u"{x:.0f}$^\circ$"))
+    # plt.xticks([0,60,120,180], labels=[r"$0^\circ$",
+    #                                    r"$60^\circ$",
+    #                                    r"$120^\circ$",
+    #                                    r"$180^\circ$",
+    # ])
+    # plt.yticks([0,60,120,180], labels=[r"$0^\circ$",
+    #                                    r"$60^\circ$",
+    #                                    r"$120^\circ$",
+    #                                    r"$180^\circ$",
+    # ])
     # plt.xlabel("Position of C2")
     # plt.ylabel("Weighted arithmetic mean")
-    # plt.title("WAM output for varying cue conflict")
-    # plt.legend()
+    # plt.title("Weighted Arithmetic Mean (WAM)")
     # plt.gca().set_aspect('equal')
-
-    # plt.savefig("cmle_vs_wam.png", bbox_inches="tight")
-    # plt.show()
+    # plt.tight_layout()
+    # plt.legend(fontsize=9)
+    # plt.savefig("cmle_vs_wam.pdf", bbox_inches="tight")
+#    plt.show()
 
     # """
     # Plotting the outputs of both wavg and mmcs for all possible conflicts.
@@ -272,6 +288,7 @@ if __name__ == "__main__":
     # a, l = wavg(0, np.pi, 0.5, 0.5)
     # print("Theta: {}, Length: {}".format(a, l))
 
+    # fig = plt.figure(figsize=(8,6))
     # plt.subplot(221)
 
     # for weight in weights:
@@ -371,37 +388,46 @@ if __name__ == "__main__":
     """
     Weight colourmap
     """
-    # kappas = np.arange(0.1, 4, 0.01)
-    # k0, k1 = np.meshgrid(kappas, kappas)
+    # interval=0.01
+    # kappas = np.arange(0.1, 4+interval, interval)
 
+    # k0, k1 = np.meshgrid(kappas, kappas)
+    # ticks=np.arange(0.5, 4.5, 0.5)
     # w = non_adjusted_weight(k1, k0)
     # wa = adjusted_weight_function(k1, k0)
     # #wa = adjusted_weight_function(kappas, kappas)
 
-    # fig = plt.figure(figsize=(16,9))
+    # fig = plt.figure(figsize=(8,4.5))
     # ax = plt.subplot(121)
-    # ax.set_aspect(1)
-    # ax.set_title("Normalised weight $W_W$ w.r.t. $\kappa_L$, $\kappa_W$")
-    # ax.set_ylabel("$\kappa_W$")
-    # ax.set_xlabel("$\kappa_L$")
+    # ax.set_aspect('equal')
+    # ax.set_title("Normalised weight $W_W$ w.r.t. $\kappa_L$, $\kappa_W$", pad=10)
+    # ax.set_ylabel("$\kappa_W$",fontsize=12)
+    # ax.set_xlabel("$\kappa_L$",fontsize=12)
+    # ax.set_xticks(ticks)
+    # ax.set_yticks(ticks)
     # plt.xlim([0.1,4])
     # plt.ylim([0.1,4])
     # wmap = ax.pcolormesh(k0, k1, w, shading='auto')
+    # wmap.set_edgecolor('face')
 
     # ax2 = plt.subplot(122)
-    # ax2.set_aspect(1)
-    # ax2.set_title("Final adjusted weight $w_W = g(W_W)$ w.r.t. $\kappa_L$, $\kappa_W$")
-    # ax2.set_ylabel("$\kappa_W$")
-    # ax2.set_xlabel("$\kappa_L$")
+    # ax2.set_aspect('equal')
+    # ax2.set_title("Final adjusted weight $w_W = g(W_W)$", pad=10)
+    # ax2.set_ylabel("$\kappa_W$",fontsize=12)
+    # ax2.set_xlabel("$\kappa_L$",fontsize=12)
+    # ax2.set_xticks(ticks)
+    # ax2.set_yticks(ticks)
     # plt.xlim([0.1,4])
     # plt.ylim([0.1,4])
 
     # wamap = ax2.pcolormesh(k0, k1, wa, shading='auto')
+    # wamap.set_edgecolor('face')
 
-    # cbar = fig.colorbar(wmap, ax=[ax, ax2], shrink=0.6)
+    # cbar = fig.colorbar(wmap, location='bottom', ax=[ax, ax2], shrink=0.4,orientation='horizontal')# ax=[ax, ax2], shrink=0.6)
     # cbar.ax.set_title("Weight value")
-    # plt.savefig("weight_adjustment_effect.png", bbox_inches="tight")
-    # plt.show()
+
+    # plt.savefig("weight_adjustment_effect.pdf", bbox_inches="tight")
+#    plt.show()
 
     # """
     # Adjusted weight interaction w.r.t. kappas
@@ -496,25 +522,25 @@ if __name__ == "__main__":
     # """
     # Kappa approximation vs. true solutions
     # """
-    # kvals = np.linspace(0, 300, 1000)
-    # rvals = np.linspace(0, 0.98, 1000)
-    # kr = [ kappa_approximation(x) for x in rvals]
-    # R = 0.998
-    # fig = plt.figure()
-    # fun = f(R, kvals)
-    # roots = []
-    # for r in rvals:
-    #     res = root_scalar(fn, args=(r), bracket=[0, 500], x0=10, x1=700)
-    #     roots.append(res.root)
+    kvals = np.linspace(0, 300, 1000)
+    rvals = np.linspace(0, 0.98, 1000)
+    kr = [ kappa_approximation(x) for x in rvals]
+    R = 0.998
 
-    # fig = plt.figure(figsize=(8,6))
-    # plt.subplot(111)
-    # plt.plot(rvals, kr, label="$\kappa$ approximation", color="red")
-    # plt.plot(rvals, roots, label="True $\kappa$ estimates", color="blue", alpha=0.5)
-    # plt.title(r'$\hat\kappa$ approximation vs. true solutions of $R =\frac{ I_1 (\kappa ) }{ I_0 (\kappa ) }$')
-    # plt.ylabel("$\hat\kappa$")
-    # plt.xlabel("Mean vector length - $R$")
-    # plt.legend()
+    fun = f(R, kvals)
+    roots = []
+    for r in rvals:
+        res = root_scalar(fn, args=(r), bracket=[0, 500], x0=10, x1=700)
+        roots.append(res.root)
 
-    # plt.savefig("kappa_approximation.png", bbox_inches='tight')
-    # plt.show()
+    fig = plt.figure(figsize=(8,4.5))
+    plt.subplot(111)
+    plt.plot(rvals, kr, label="$\kappa$ approximation", color="red", linestyle='dashdot')
+    plt.plot(rvals, roots, label="True $\kappa$ estimates", color="blue", alpha=0.5)
+    plt.title(r'$\hat\kappa$ approximation vs. true solutions of $R =\frac{ I_1 (\kappa ) }{ I_0 (\kappa ) }$')
+    plt.ylabel("$\hat\kappa$")
+    plt.xlabel("Mean vector length - $R$")
+    plt.legend()
+
+    plt.savefig("kappa_approximation.pdf", bbox_inches='tight')
+    plt.show()

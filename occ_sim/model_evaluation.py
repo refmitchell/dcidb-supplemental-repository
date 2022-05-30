@@ -149,7 +149,7 @@ def bws_variance_and_slope_evaluation():
 def bws_variance_evaluation():
     """
     Evaluate the Biased Weighted Sum model which excludes the concept of "bias
-    windows" (i.e. only the variance of the bias distribution is changed). 
+    windows" (i.e. only the variance of the bias distribution is changed).
     """
 
     nbins = 72
@@ -214,12 +214,16 @@ def bws_variance_evaluation():
 
     evaluation_df.to_csv("nowindow_bws_evaluation_df.csv")
 
-    fig = plt.figure(figsize=(16,9))
+    fig = plt.figure(figsize=(8,4.5))
     ax = plt.subplot(111)
 
     unsorted_ys = list(evaluation_df["norm"])
     unsorted_xs = [variance_id(x) for x in list(evaluation_df.index)]
-    print(unsorted_xs)
+
+    mle_var = evaluation_df[evaluation_df["sum"] == mle].index[0].split("-")[2][:-4]
+    mle_var_float = float(mle_var)
+    mle_var_str = "{:.06f}...".format(mle_var_float)
+    print(mle_var_str)
 
     data = list(zip(unsorted_xs, unsorted_ys))
     data = sorted(data, key=lambda x: x[0])
@@ -229,9 +233,17 @@ def bws_variance_evaluation():
 #    plt.ylim([0.99,1.01])
     plt.plot(xs, ys)
     plt.title("Log likelihood ratio w.r.t. variance MLE $\hat \sigma^2$")
+    marker_lbl = r"$\hat{\sigma}^2 = " + mle_var_str + "$"
+    print(marker_lbl)
+    plt.axvline(mle_var_float,
+                color="darkred",
+                linestyle='dashed',
+                label=marker_lbl)
     plt.xlabel("Variance parameter - $\sigma^2$")
-    plt.ylabel("Log likelihood ratio")
-    plt.savefig("../latex/img/no_window_variance_analysis.png")
+    plt.ylabel("Log likelihood ratio, " + marker_lbl)
+    plt.legend()
+    plt.savefig("../latex/img/no_window_variance_analysis.pdf")
+
     plt.show()
 
     return True
@@ -310,7 +322,7 @@ def nws_param_evaluation():
 
     evaluation_df.to_csv("slope_evaluation_df.csv")
 
-    fig = plt.figure(figsize=(16,9))
+    fig = plt.figure(figsize=(8,4.5))
     ax = plt.subplot(111)
 
     unsorted_ys = list(evaluation_df["norm"])
@@ -323,11 +335,13 @@ def nws_param_evaluation():
     plt.xlim([-1,80])
 #    plt.ylim([0.99,1.03])
     plt.plot(xs, ys)
-    plt.title("Log likelihood ratio w.r.t. slope MLE $\hat a$")
+    plt.axvline(mle_slope, linestyle='--', color='darkred', label='$\hat{a} = 53$')
+    plt.title("Log likelihood ratio w.r.t. slope MLE $\hat{a}$")
     plt.xlabel("Slope parameter - $a$")
-    plt.ylabel("Log likelihood ratio, $\hat a = {}$".format(mle_slope))
-    plt.savefig("../latex/img/SlopeLA.png")
-    plt.show()
+    plt.ylabel(r'Log likelihood ratio, $\hat{a} = ' + str(mle_slope) + '$')
+    plt.legend()
+    plt.savefig("../latex/img/SlopeLA.pdf")
+#    plt.show()
 
     return mle_slope
 
@@ -557,8 +571,9 @@ if __name__ == "__main__":
     using population_generation.py, then the evaluation results may be slightly
     different. The overall picture however, should remain the same.
     """
+    nws_param_evaluation()
 #    bws_variance_evaluation()
 #    bws_param_evaluation()
 #    bws_variance_and_slope_evaluation()
-    cross_model_evaluation()
+#    cross_model_evaluation()
 #    print(nws_param_evaluation())

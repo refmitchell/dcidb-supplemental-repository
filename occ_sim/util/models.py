@@ -194,7 +194,7 @@ if __name__ == "__main__":
                 wind_means,
                 yerr=wind_sem,
                 fmt='.',
-                label="Mean precision"
+                label="Mean precision with standard error"
     )
 
     ax.plot(windvals,
@@ -229,6 +229,7 @@ if __name__ == "__main__":
 
     # Omit 82, 84, 86, and 88 for readability at A4 scale
     ticklbls = ['5', '20', '45', '60', '75', '80','','', '', '','90']
+
     ax2.set_xticklabels(ticklbls)
 
     # Plot data summary stats
@@ -237,7 +238,7 @@ if __name__ == "__main__":
                  yerr=elevation_sem,
                  fmt='.',
                  color='forestgreen',
-                 label="Mean precision")
+                 label="Mean precision with standard error")
 
     # Plot lower and upper estimators
     est_colour = 'tab:green'
@@ -315,12 +316,12 @@ if __name__ == "__main__":
                zorder=0,
                linewidth=lw)
 
-
+    ax.set_xticks([1.0, 1.5, 1.9, 2.5])
     ax.legend()
     fig.subplots_adjust(wspace=0.03)
 
     """
     Uncomment to display or reproduce figure.
     """
-#    plt.savefig("kappa_estimators.pdf", bbox_inches="tight")
+    plt.savefig("kappa_estimators.eps", bbox_inches="tight")
 #    plt.show()
