@@ -2,7 +2,7 @@
 
 This repository contains the cue combination behavioural data and
 simulation software tools which were used to produce the modelling
-work for the paper "Directional Cue Integration in Dung Beetles"
+work for the paper "Weighted cue integration for straight-line orientation"
 (Shaverdian et al., in preparation).
 
 The name occ_sim comes from [O]ptimal [C]ue [C]ombination [Sim]ulator;
