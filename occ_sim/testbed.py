@@ -202,84 +202,84 @@ if __name__ == "__main__":
     desired plot.
     """
 
-    # """
-    # Plotting a circular weighted summation vs an weighted arithmetic mean.
-    # """
-    # n = 10000
-    # weights = np.arange(0.1,1,0.1)
+    """
+    Plotting a circular weighted summation vs an weighted arithmetic mean.
+    """
+    n = 10000
+    weights = np.arange(0.1,1,0.1)
 
-    # cue_one = np.zeros(n)
-    # cue_two = np.linspace(0,np.pi,n)
+    cue_one = np.zeros(n)
+    cue_two = np.linspace(0,np.pi,n)
 
-    # fig = plt.figure(figsize=(8,4.5))
-    # plt.subplot(122)
+    fig = plt.figure(figsize=(8,4.5))
+    plt.subplot(122)
 
-    # for weight in weights:
-    #     w1 = weight
-    #     w2 = 1 - weight
-    #     mmcs_out, _ = mmcs(cue_one, cue_two, w1, w2)
-    #     plt.plot(np.degrees(cue_two),
-    #              np.degrees(mmcs_out),
-    #              label="w1={:.01f}".format(w1))
+    for weight in weights:
+        w1 = weight
+        w2 = 1 - weight
+        mmcs_out, _ = mmcs(cue_one, cue_two, w1, w2)
+        plt.plot(np.degrees(cue_two),
+                 np.degrees(mmcs_out),
+                 label="w1={:.01f}".format(w1))
 
-    # plt.vlines([60,120], 0, 180, color='grey', alpha=0.5, linestyles='--')
-    # plt.xlim([0,180])
-    # plt.xticks([0,60,120,180], labels=[r"$0^\circ$",
-    #                                    r"$60^\circ$",
-    #                                    r"$120^\circ$",
-    #                                    r"$180^\circ$",
-    # ])
-    # plt.yticks([0,60,120,180], labels=[r"$0^\circ$",
-    #                                    r"$60^\circ$",
-    #                                    r"$120^\circ$",
-    #                                    r"$180^\circ$",
-    # ])
+    plt.vlines([60,120], 0, 180, color='grey', alpha=0.5, linestyles='--')
+    plt.xlim([0,180])
+    plt.xticks([0,60,120,180], labels=[r"$0^\circ$",
+                                       r"$60^\circ$",
+                                       r"$120^\circ$",
+                                       r"$180^\circ$",
+    ])
+    plt.yticks([0,60,120,180], labels=[r"$0^\circ$",
+                                       r"$60^\circ$",
+                                       r"$120^\circ$",
+                                       r"$180^\circ$",
+    ])
 
-    # plt.ylim([0,180])
-    # plt.xlabel("Angular position of C2")
-    # plt.ylabel("WVS Decision Variable L")
-    # plt.title("Weighted Vector Sum (WVS)")
-    # plt.gca().set_aspect('equal')
+    plt.ylim([0,180])
+    plt.xlabel("Angular position of C2")
+    plt.ylabel("WVS Decision Variable L")
+    plt.title("Weighted Vector Sum (WVS)")
+    plt.gca().set_aspect('equal')
 
-    # plt.subplot(121)
+    plt.subplot(121)
 
-    # for weight in weights:
-    #     w1 = weight
-    #     w2 = 1 - weight
-    #     wavg_out, _ = lwavg(cue_one, cue_two, w1, w2)
-    #     plt.plot(np.degrees(cue_two),
-    #              np.degrees(wavg_out),
-    #              label="w1={:.01f}".format(w1))
+    for weight in weights:
+        w1 = weight
+        w2 = 1 - weight
+        wavg_out, _ = lwavg(cue_one, cue_two, w1, w2)
+        plt.plot(np.degrees(cue_two),
+                 np.degrees(wavg_out),
+                 label="w1={:.01f}".format(w1))
 
-    # plt.vlines([60,120], 0, 180, color='grey', alpha=0.5, linestyles='--')
-    # plt.xlim([0,180])
-    # plt.ylim([0,180])
-    # plt.xticks([0,60,120,180], labels=[r"$0^\circ$",
-    #                                    r"$60^\circ$",
-    #                                    r"$120^\circ$",
-    #                                    r"$180^\circ$",
-    # ])
-    # plt.yticks([0,60,120,180], labels=[r"$0^\circ$",
-    #                                    r"$60^\circ$",
-    #                                    r"$120^\circ$",
-    #                                    r"$180^\circ$",
-    # ])
-    # plt.xlabel("Position of C2")
-    # plt.ylabel("Weighted arithmetic mean")
-    # plt.title("Weighted Arithmetic Mean (WAM)")
-    # plt.gca().set_aspect('equal')
-    # plt.tight_layout()
-    # plt.legend(fontsize=9)
-    # plt.savefig("cmle_vs_wam.pdf", bbox_inches="tight")
-#    plt.show()
+    plt.vlines([60,120], 0, 180, color='grey', alpha=0.5, linestyles='--')
+    plt.xlim([0,180])
+    plt.ylim([0,180])
+    plt.xticks([0,60,120,180], labels=[r"$0^\circ$",
+                                       r"$60^\circ$",
+                                       r"$120^\circ$",
+                                       r"$180^\circ$",
+    ])
+    plt.yticks([0,60,120,180], labels=[r"$0^\circ$",
+                                       r"$60^\circ$",
+                                       r"$120^\circ$",
+                                       r"$180^\circ$",
+    ])
+    plt.xlabel("Position of C2")
+    plt.ylabel("Weighted arithmetic mean")
+    plt.title("Weighted Arithmetic Mean (WAM)")
+    plt.gca().set_aspect('equal')
+    plt.tight_layout()
+    plt.legend(fontsize=9)
+    plt.savefig("cmle_vs_wam.svg", bbox_inches="tight")
+    # plt.show()
 
-    # """
-    # Plotting the outputs of both wavg and mmcs for all possible conflicts.
+    """
+    Plotting the outputs of both wavg and mmcs for all possible conflicts.
 
-    # Hypothetically, Cue 1 stays at zero, Cue 2 is varied over 0-2pi. We then
-    # plot the output (Angle between 0-2pi) for all conditions. The point is to
-    # see how similar these methods are.
-    # """
+    Hypothetically, Cue 1 stays at zero, Cue 2 is varied over 0-2pi. We then
+    plot the output (Angle between 0-2pi) for all conditions. The point is to
+    see how similar these methods are.
+    """
     # n = 10000
     # weights = np.arange(0.1,1,0.1)
 
@@ -347,9 +347,9 @@ if __name__ == "__main__":
     # plt.legend()
     # plt.show()
 
-#     """
-#     Plotting normal distributions for individual bias.
-#     """
+    """
+    Plotting normal distributions for individual bias.
+    """
     # a, b = -0.05, 0.05
 
     # bias = 1
@@ -388,50 +388,50 @@ if __name__ == "__main__":
     """
     Weight colourmap
     """
-    # interval=0.01
-    # kappas = np.arange(0.1, 4+interval, interval)
+    interval=0.01
+    kappas = np.arange(0.1, 4+interval, interval)
 
-    # k0, k1 = np.meshgrid(kappas, kappas)
-    # ticks=np.arange(0.5, 4.5, 0.5)
-    # w = non_adjusted_weight(k1, k0)
-    # wa = adjusted_weight_function(k1, k0)
-    # #wa = adjusted_weight_function(kappas, kappas)
+    k0, k1 = np.meshgrid(kappas, kappas)
+    ticks=np.arange(0.5, 4.5, 0.5)
+    w = non_adjusted_weight(k1, k0)
+    wa = adjusted_weight_function(k1, k0)
+    #wa = adjusted_weight_function(kappas, kappas)
 
-    # fig = plt.figure(figsize=(8,4.5))
-    # ax = plt.subplot(121)
-    # ax.set_aspect('equal')
-    # ax.set_title("Normalised weight $W_W$ w.r.t. $\kappa_L$, $\kappa_W$", pad=10)
-    # ax.set_ylabel("$\kappa_W$",fontsize=12)
-    # ax.set_xlabel("$\kappa_L$",fontsize=12)
-    # ax.set_xticks(ticks)
-    # ax.set_yticks(ticks)
-    # plt.xlim([0.1,4])
-    # plt.ylim([0.1,4])
-    # wmap = ax.pcolormesh(k0, k1, w, shading='auto')
-    # wmap.set_edgecolor('face')
+    fig = plt.figure(figsize=(8,4.5))
+    ax = plt.subplot(121)
+    ax.set_aspect('equal')
+    ax.set_title("Normalised weight $W_W$ w.r.t. $\kappa_L$, $\kappa_W$", pad=10)
+    ax.set_ylabel("$\kappa_W$",fontsize=12)
+    ax.set_xlabel("$\kappa_L$",fontsize=12)
+    ax.set_xticks(ticks)
+    ax.set_yticks(ticks)
+    plt.xlim([0.1,4])
+    plt.ylim([0.1,4])
+    wmap = ax.pcolormesh(k0, k1, w, shading='auto')
+    wmap.set_edgecolor('face')
 
-    # ax2 = plt.subplot(122)
-    # ax2.set_aspect('equal')
-    # ax2.set_title("Final adjusted weight $w_W = g(W_W)$", pad=10)
-    # ax2.set_ylabel("$\kappa_W$",fontsize=12)
-    # ax2.set_xlabel("$\kappa_L$",fontsize=12)
-    # ax2.set_xticks(ticks)
-    # ax2.set_yticks(ticks)
-    # plt.xlim([0.1,4])
-    # plt.ylim([0.1,4])
+    ax2 = plt.subplot(122)
+    ax2.set_aspect('equal')
+    ax2.set_title("Final adjusted weight $w_W = g(W_W)$", pad=10)
+    ax2.set_ylabel("$\kappa_W$",fontsize=12)
+    ax2.set_xlabel("$\kappa_L$",fontsize=12)
+    ax2.set_xticks(ticks)
+    ax2.set_yticks(ticks)
+    plt.xlim([0.1,4])
+    plt.ylim([0.1,4])
 
-    # wamap = ax2.pcolormesh(k0, k1, wa, shading='auto')
-    # wamap.set_edgecolor('face')
+    wamap = ax2.pcolormesh(k0, k1, wa, shading='auto')
+    wamap.set_edgecolor('face')
 
-    # cbar = fig.colorbar(wmap, location='bottom', ax=[ax, ax2], shrink=0.4,orientation='horizontal')# ax=[ax, ax2], shrink=0.6)
-    # cbar.ax.set_title("Weight value")
+    cbar = fig.colorbar(wmap, location='bottom', ax=[ax, ax2], shrink=0.4,orientation='horizontal')# ax=[ax, ax2], shrink=0.6)
+    cbar.ax.set_title("Weight value")
 
-    # plt.savefig("weight_adjustment_effect.pdf", bbox_inches="tight")
-#    plt.show()
+    plt.savefig("weight_adjustment_effect.svg", bbox_inches="tight")
+    # plt.show()
 
-    # """
-    # Adjusted weight interaction w.r.t. kappas
-    # """
+    """
+    Adjusted weight interaction w.r.t. kappas
+    """
     # fig = plt.figure(figsize=(12,12))
     # ax = fig.gca(projection='3d')
     # kappas = np.arange(0.1, 4, 0.01)
@@ -455,11 +455,11 @@ if __name__ == "__main__":
     # plt.savefig("adjusted_weight_function.png", bbox_inches="tight")
     # plt.show()
 
-    # """
-    # Weight function (g)
-    # """
+    """
+    Weight function (g)
+    """
     # inputs = np.linspace(0, 1, 1000)
-    # outputs = adjust_R(inputs, slope=60)
+    # outputs = adjust_R(inputs, slope=53)
     # ticks = np.arange(0,1.1,step=0.1)
     # print(ticks)
     # fig = plt.figure(figsize=(12,12))
@@ -496,26 +496,25 @@ if __name__ == "__main__":
     # plt.savefig("rvaladj.png", bbox_inches='tight')
     # plt.show()
 
-    # """
-    # von Mises distributions for different Kappa
-    # """
-#     thetas = np.linspace(-np.pi, np.pi, 1000)
-#     kappas = [0.25, 0.5, 1, 2, 4, 8]
+    """
+    von Mises distributions for different Kappa
+    """
+    # thetas = np.linspace(-np.pi, np.pi, 1000)
+    # kappas = [0.25, 0.5, 1, 2, 4, 8]
 
-# #    fig = plt.figure(figsize=(12,6.75))
-#     fig = plt.figure(figsize=(4,3))
-#     for kappa in kappas:
-#         yvals = vonmises(thetas, 0, kappa)
-#         plt.plot(np.degrees(thetas), yvals, label="$\kappa =$ {}".format(kappa))
+    # fig = plt.figure(figsize=(4,3))
+    # for kappa in kappas:
+    #     yvals = vonmises(thetas, 0, kappa)
+    #     plt.plot(np.degrees(thetas), yvals, label="$\kappa =$ {}".format(kappa))
 
-#     plt.ylabel("Probability density")
-#     plt.xlabel("x (Degrees)")
-#     plt.ylim([0,1])
-#     plt.xlim([-180, 180])
-#     plt.title("von Mises probability density function")
-#     plt.legend()
-#     plt.savefig("vmpdf.png", bbox_inches='tight')
-#     plt.show()
+    # plt.ylabel("Probability density")
+    # plt.xlabel("x (Degrees)")
+    # plt.ylim([0,1])
+    # plt.xlim([-180, 180])
+    # plt.title("von Mises probability density function")
+    # plt.legend()
+    # plt.savefig("vmpdf.png", bbox_inches='tight')
+    # plt.show()
 
 
 
@@ -542,5 +541,5 @@ if __name__ == "__main__":
     plt.xlabel("Mean vector length - $R$")
     plt.legend()
 
-    plt.savefig("kappa_approximation.pdf", bbox_inches='tight')
-    plt.show()
+    plt.savefig("kappa_approximation.svg", bbox_inches='tight')
+    # plt.show()

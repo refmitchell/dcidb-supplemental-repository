@@ -230,7 +230,7 @@ def bws_variance_evaluation():
     xs = [ x for (x,_) in data ]
     ys = [ y for (_,y) in data ]
     plt.xlim([0,0.01])
-#    plt.ylim([0.99,1.01])
+    # plt.ylim([0.99,1.01])
     plt.plot(xs, ys)
     plt.title("Log likelihood ratio w.r.t. variance MLE $\hat \sigma^2$")
     marker_lbl = r"$\hat{\sigma}^2 = " + mle_var_str + "$"
@@ -242,9 +242,9 @@ def bws_variance_evaluation():
     plt.xlabel("Variance parameter - $\sigma^2$")
     plt.ylabel("Log likelihood ratio, " + marker_lbl)
     plt.legend()
-    plt.savefig("../latex/img/no_window_variance_analysis.pdf")
+    plt.savefig("no_window_variance_analysis.svg")
 
-    plt.show()
+    # plt.show()
 
     return True
 
@@ -340,7 +340,7 @@ def nws_param_evaluation():
     plt.xlabel("Slope parameter - $a$")
     plt.ylabel(r'Log likelihood ratio, $\hat{a} = ' + str(mle_slope) + '$')
     plt.legend()
-    plt.savefig("../latex/img/SlopeLA.pdf")
+    plt.savefig("slope_likelihood_analysis.svg")
 #    plt.show()
 
     return mle_slope
@@ -452,7 +452,7 @@ def cross_model_evaluation():
     fill_x = np.linspace(-10, 10, 100)
     fill_y = np.zeros(len(fill_x))
     plt.fill_between(fill_x, fill_y, color="grey")
-    plt.savefig("../latex/img/cme.png", bbox_inches="tight")
+    # plt.savefig("../latex/img/cme.png", bbox_inches="tight")
     # plt.show()
     return evaluation_df
 
@@ -572,7 +572,7 @@ if __name__ == "__main__":
     different. The overall picture however, should remain the same.
     """
     nws_param_evaluation()
-#    bws_variance_evaluation()
+    bws_variance_evaluation()
 #    bws_param_evaluation()
 #    bws_variance_and_slope_evaluation()
 #    cross_model_evaluation()

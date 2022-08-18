@@ -1,11 +1,12 @@
 """
+[Legacy]
 data_production.py
 
-This script was used to produce the mimic data from the paper; as
-noted in the text, this data was specifically curated to be as close
-to the biological data as possible using mean vector error. As stated
-in the text data is meant to demonstrate that the observed data is
-possible under the chosen model, not how likely it is to occur.
+This script was used to produce data which mimiced the behavioural
+results; this data was specifically curated to be as close
+to the biological data as possible using mean vector error. This
+was meant to illustrate that the data observed were possible under
+candidate model (BWS), not how likely they were to occur.
 """
 
 from util.treatment import Treatment
