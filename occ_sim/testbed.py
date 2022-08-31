@@ -407,7 +407,7 @@ if __name__ == "__main__":
     ax.set_yticks(ticks)
     plt.xlim([0.1,4])
     plt.ylim([0.1,4])
-    wmap = ax.pcolormesh(k0, k1, w, shading='auto')
+    wmap = ax.pcolormesh(k0, k1, w, rasterized=True, shading='auto')
     wmap.set_edgecolor('face')
 
     ax2 = plt.subplot(122)
@@ -420,13 +420,13 @@ if __name__ == "__main__":
     plt.xlim([0.1,4])
     plt.ylim([0.1,4])
 
-    wamap = ax2.pcolormesh(k0, k1, wa, shading='auto')
+    wamap = ax2.pcolormesh(k0, k1, wa, rasterized=True, shading='auto')
     wamap.set_edgecolor('face')
 
     cbar = fig.colorbar(wmap, location='bottom', ax=[ax, ax2], shrink=0.4,orientation='horizontal')# ax=[ax, ax2], shrink=0.6)
     cbar.ax.set_title("Weight value")
 
-    plt.savefig("weight_adjustment_effect.svg", bbox_inches="tight")
+    plt.savefig("weight_adjustment_effect.svg", dpi=300, bbox_inches="tight")
     # plt.show()
 
     """

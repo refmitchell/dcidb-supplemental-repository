@@ -63,7 +63,7 @@ if __name__ == "__main__":
 
     ax.set_title("Wind speed across arena, 2.5m/s")
 
-    cmap = ax.pcolormesh(tt, rr, interp_tf, cmap='Blues', shading='auto')
+    cmap = ax.pcolormesh(tt, rr, interp_tf, rasterized=True, cmap='Blues', shading='auto')
     cmap.set_edgecolor('face')
     ax.grid(True, color='k')
     plt.colorbar(cmap, ax=ax, orientation='horizontal', pad=0.05)
@@ -75,10 +75,10 @@ if __name__ == "__main__":
     ax2.set_rticks([0,10,20,30])
     ax2.set_title("Wind speed across arena, 1.25m/s")
 
-    cmap2 = ax2.pcolormesh(tt, rr, interp_otf, cmap='Blues', shading='auto')
+    cmap2 = ax2.pcolormesh(tt, rr, interp_otf, rasterized=True, cmap='Blues', shading='auto')
     cmap2.set_edgecolor('face')
     ax2.grid(True, color='k')
     plt.colorbar(cmap2, ax=ax2, orientation="horizontal", pad=0.05)
     plt.tight_layout()
-    plt.savefig("wind_heatmaps.svg", bbox_inches="tight")
+    plt.savefig("wind_heatmaps.svg", dpi=300, bbox_inches="tight")
     plt.show()
