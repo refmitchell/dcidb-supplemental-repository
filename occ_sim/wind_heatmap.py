@@ -11,6 +11,7 @@ the final polar plots
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+plt.rcParams['font.family'] = 'Avenir Next LT Pro'
 from scipy.interpolate import interp2d,griddata,bisplrep,bisplev
 
 if __name__ == "__main__":
@@ -81,4 +82,5 @@ if __name__ == "__main__":
     plt.colorbar(cmap2, ax=ax2, orientation="horizontal", pad=0.05)
     plt.tight_layout()
     plt.savefig("wind_heatmaps.svg", dpi=300, bbox_inches="tight")
+    plt.savefig("wind_heatmaps.pdf", dpi=300, bbox_inches="tight")
     plt.show()

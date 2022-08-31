@@ -9,6 +9,7 @@ from scipy.special import iv
 from scipy.optimize import root_scalar
 import scipy.stats as stats
 import matplotlib.pyplot as plt
+plt.rcParams['font.family'] = 'Avenir Next LT Pro'
 from matplotlib import cm
 from matplotlib.ticker import StrMethodFormatter
 import numpy as np
@@ -427,6 +428,7 @@ if __name__ == "__main__":
     cbar.ax.set_title("Weight value")
 
     plt.savefig("weight_adjustment_effect.svg", dpi=300, bbox_inches="tight")
+    plt.savefig("weight_adjustment_effect.pdf", dpi=300, bbox_inches="tight")
     # plt.show()
 
     """
